@@ -7,6 +7,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import BotCommand
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import ConnectionFailure
@@ -38,11 +39,20 @@ dp = Dispatcher(storage=storage)
 
 dp.include_router(main_router)
 
+async def set_bot_commands(bot: Bot) -> None:
+    for language, commands in Config.COMMANDS.items():
+        bot_commands = [BotCommand(command=cmd, description=desc) for cmd, desc in commands]
+        await bot.set_my_commands(bot_commands, language_code=language)
+    logger.info("Команды бота успешно зарегистрированы для всех языков")
+
 async def setup_middlewares():
     dp.update.outer_middleware(language_middleware)
 
-async def on_startup():
+async def on_startup(bot: Bot) -> None:
+
     await setup_middlewares()
+    await set_bot_commands(bot)
+
     logger.info("Бот запущен и готов к работе")
 
     mongo.clear_all_cache()

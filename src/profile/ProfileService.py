@@ -20,10 +20,10 @@ mongo = MongoService()
 
 @router.callback_query(F.data == "profile")
 async def profile_callback(query: CallbackQuery) -> None:
-    await profile(query.message, query.from_user.id)
+    await profile(query.message, query.from_user.id, request="back")
     await query.answer()
 
-async def profile(message, user_id) -> None:
+async def profile(message, user_id, request: str) -> None:
     try:
         user = await mongo.get_user_from_db(user_id)
         if not user:
@@ -35,12 +35,16 @@ async def profile(message, user_id) -> None:
         balance = user_data.get('balance', 0)
         reg_date = user.get('FIRST_JOIN', '')
 
-        profile_text = get_text("profile.profile_main", language, id=user_id,
+        profile_text = get_text("profile.profile_main", language,
+                                id=user_id,
                                 language=language,
                                 balance=balance,
-                                registration_date=reg_date)
-
-        await message.answer(profile_text, parse_mode=ParseMode.MARKDOWN, reply_markup= await profile_keyboard(language))
+                                registration_date=reg_date,
+                                user_name=message.from_user.first_name) #ik abt bug with callback query ig i fix it later
+        if request == "back":
+            await message.edit_text(profile_text, parse_mode=ParseMode.MARKDOWN, reply_markup= await profile_keyboard(language))
+        else:
+            await message.answer(profile_text, parse_mode=ParseMode.MARKDOWN, reply_markup= await profile_keyboard(language))
 
     except Exception as e:
         logger.error(f"Ошибка в функции profile для пользователя {message.from_user.id}: {e}")

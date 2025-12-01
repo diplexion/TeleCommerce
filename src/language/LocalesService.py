@@ -17,11 +17,30 @@ LOCALES = {
         "info": RuMessages.INFO,
         "profile": {
             "profile_main": RuMessages.Profile.MAIN,
-            "top_up_balance": RuMessages.Profile.TOP_UP_BALANCE,
+            "back_to_profile": RuMessages.Profile.BACK_TO_PROFILE,
+            "top_up_balance": {
+                "top_up_options_stars_button": RuMessages.Profile.TOP_UP_OPTIONS_STARS_BUTTON,
+                "top_up_options_crypto_button": RuMessages.Profile.TOP_UP_OPTIONS_CRYPTO_BUTTON,
+                "top_up_balance_button": RuMessages.Profile.TOP_UP_BALANCE_BUTTON,
+                "top_up_balance_title": RuMessages.Profile.TOP_UP_BALANCE_TITLE,
+                "back_to_top_up_balance_button": RuMessages.Profile.BACK_TO_TOP_UP_BALANCE_BUTTON,
+            },
             "stars": {
                 "input_amount": RuMessages.Profile.Stars.INPUT_AMOUNT,
                 "stars_count_error": RuMessages.Profile.Stars.STARS_COUNT_ERROR,
                 "pay_stars_button": RuMessages.Profile.Stars.PAY_STARS_BUTTON,
+                "title_stars_payment": RuMessages.Profile.Stars.TITLE_STARS_PAYMENT,
+                "description_stars_payment": RuMessages.Profile.Stars.DESCRIPTION_STARS_PAYMENT,
+                "successful_stars_payment": RuMessages.Profile.Stars.SUCCESSFUL_PAYMENT,
+            #TODO Add crypto payment option later
+            #"crypto": {
+                #"input_amount": RuMessages.Profile.Crypto.INPUT_AMOUNT,
+                #"crypto_count_error": RuMessages.Profile.Crypto.CRYPTO_COUNT_ERROR,
+                #"pay_crypto_button": RuMessages.Profile.Crypto.PAY_CRYPTO_BUTTON,
+                #"title_crypto_payment": RuMessages.Profile.Crypto.TITLE_CRYPTO_PAYMENT,
+                #"description_crypto_payment": RuMessages.Profile.Crypto.DESCRIPTION_CRYPTO_PAYMENT,
+                #"successful_crypto_payment": RuMessages.Profile.Crypto.SUCCESSFUL_PAYMENT,
+            #}
             },
         },
         "store": {
@@ -39,9 +58,21 @@ LOCALES = {
         "info": EnglishMessages.INFO,
         "profile": {
             "profile_main": EnglishMessages.Profile.MAIN,
-            "top_up_balance": EnglishMessages.Profile.TOP_UP_BALANCE,
+            "back_to_profile": EnglishMessages.Profile.BACK_TO_PROFILE,
+            "top_up_balance": {
+                "top_up_options_stars_button": EnglishMessages.Profile.TOP_UP_OPTIONS_STARS_BUTTON,
+                "top_up_options_crypto_button": EnglishMessages.Profile.TOP_UP_OPTIONS_CRYPTO_BUTTON,
+                "top_up_balance_button": EnglishMessages.Profile.TOP_UP_BALANCE_BUTTON,
+                "top_up_balance_title": EnglishMessages.Profile.TOP_UP_BALANCE_TITLE,
+                "back_to_top_up_balance_button": EnglishMessages.Profile.BACK_TO_TOP_UP_BALANCE_BUTTON,
+            },
             "stars": {
-        #     "input_amount":  EnglishMessages.Profile.INPUT_AMOUNT,
+                "input_amount": EnglishMessages.Profile.Stars.INPUT_AMOUNT,
+                "stars_count_error": EnglishMessages.Profile.Stars.STARS_COUNT_ERROR,
+                "pay_stars_button": EnglishMessages.Profile.Stars.PAY_STARS_BUTTON,
+                "title_stars_payment": EnglishMessages.Profile.Stars.TITLE_STARS_PAYMENT,
+                "description_stars_payment": EnglishMessages.Profile.Stars.DESCRIPTION_STARS_PAYMENT,
+                "successful_stars_payment": EnglishMessages.Profile.Stars.SUCCESSFUL_PAYMENT,
             },
         },
         "store": {

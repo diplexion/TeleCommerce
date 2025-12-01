@@ -2,7 +2,22 @@ from os import getenv
 
 class Config:
     # List of available bot commands on the quick access toolbar
-    Commands = ["info", "store", "profile", "help"]
+    COMMANDS = {
+        "ru": [
+            ("profile", "Профиль"),
+            ("language", "Язык"),
+            ("store", "Магазин"),
+        ],
+        "en": [
+            ("profile", "Profile"),
+            ("language", "Language"),
+            ("store", "Store"),
+        ],
+    }
+
+    # Put here link or username to contact support or admin
+    CONTACT_LINK = getenv("CONTACT_LINK")
+
     class Stars:
         # In rubles by default. Like 1 star = 1.3 rubles
         EXCHANGE_RATE = 1.3

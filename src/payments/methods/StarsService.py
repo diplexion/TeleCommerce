@@ -7,8 +7,10 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.state import StatesGroup, State
 
 from src.database.MongoService import MongoService
+from src.keyboards.ProfileKeyboard import back_to_top_up_options_keyboard
 from src.language.LocalesService import get_text
 from config import Config
+
 """
 @author Nik/diplexion
 @project TeleCommerce
@@ -29,7 +31,9 @@ async def handle_tg_stars(callback_query: CallbackQuery, state: FSMContext):
     user_data = user.get('PROFILE', {})
     language = user_data.get('language', '')
 
-    await callback_query.message.edit_text(get_text("profile.stars.input_amount", language, exchange_rate=Config.Stars.EXCHANGE_RATE))
+    await callback_query.message.edit_text(get_text("profile.stars.input_amount", language,
+                                            exchange_rate=Config.Stars.EXCHANGE_RATE),
+                                           reply_markup= await back_to_top_up_options_keyboard(language))
     await callback_query.answer()
     await state.set_state(StarsServiceStates.waiting_for_star_amount)
 
@@ -38,7 +42,7 @@ async def process_star_amount(message: Message, state: FSMContext):
     user = await mongo.get_user_from_db(message.from_user.id)
 
     user_data = user.get('PROFILE', {})
-    language = user_data.get('language', 'Не установлен')
+    language = user_data.get('language', '')
 
     try:
         amount = int(message.text)
@@ -52,8 +56,8 @@ async def process_star_amount(message: Message, state: FSMContext):
         prices = [LabeledPrice(label='XTR', amount=amount)]
 
         await message.answer_invoice(
-            title="Пополнение баланса",
-            description=f"Пополнение баланса с помощью TG Stars: {amount} XTR",
+            title=get_text("profile.stars.title_stars_payment", language),
+            description=get_text("profile.stars.description_stars_payment", language, amount=amount),
             payload="by stars",
             provider_token='',
             currency="XTR",
@@ -81,11 +85,20 @@ async def successful_payment_handler(message: Message):
 
         profile = user.get('PROFILE', {})
         current_stars = profile.get('balance', 0)
-        new_balance = current_stars + amount
+        language = profile.get('language', 'Не установлен')
+        new_balance = (current_stars * Config.Stars.EXCHANGE_RATE) + amount
 
         await mongo.update_user(user_id, {"PROFILE.balance": new_balance})
 
-        await message.answer(f"✅ Оплата успешна! Ваш новый баланс: {new_balance} ⭐️")
+
+        await message.answer(get_text("profile.stars.successful_stars_payment", language,
+                                      stars=amount,
+                                      rubles=amount * Config.Stars.EXCHANGE_RATE,
+                                      new_balance=new_balance,
+                                      transaction_id=message.successful_payment.invoice_payload,
+                                      date=message.date.strftime("%Y-%m-%d %H:%M:%S"),
+                                      user_name=message.from_user.full_name,
+                                      support_contact=Config.CONTACT_LINK))
     except Exception as e:
         logger.error(f"Ошибка при обработке успешной оплаты для пользователя {message.from_user.id}: {e}")
         await message.answer("❌ Произошла ошибка при обновлении баланса. Пожалуйста, свяжитесь с поддержкой.")

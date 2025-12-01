@@ -14,4 +14,4 @@ router = Router()
 
 @router.message(Command("profile"))
 async def profile_cmd(message: Message) -> None:
-    await profile(user_id=message.from_user.id, message=message)
+    await profile(user_id=message.from_user.id, message=message, request="main")
