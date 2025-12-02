@@ -2,6 +2,12 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from src.language.LocalesService import get_text
 
+"""
+@author Nik/diplexion
+@project TeleCommerce
+@date 01/12/2025
+"""
+
 async def profile_keyboard(language) -> InlineKeyboardMarkup:
 
     keyboard = InlineKeyboardMarkup(
