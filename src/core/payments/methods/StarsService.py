@@ -6,9 +6,9 @@ from aiogram.types import CallbackQuery, Message, LabeledPrice, PreCheckoutQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.state import StatesGroup, State
 
-from src.database.MongoService import MongoService
-from src.keyboards.ProfileKeyboard import back_to_top_up_options_keyboard
-from src.language.LocalesService import get_text
+from src.core.database.MongoService import MongoService
+from src.feature.keyboards.ProfileKeyboard import back_to_top_up_options_keyboard
+from src.core.locale.LocalesService import get_text
 from config import Config
 
 """

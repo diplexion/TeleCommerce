@@ -2,11 +2,11 @@ import logging
 
 from aiogram import Router, F
 from aiogram.enums import ParseMode
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery
 
-from src.database.MongoService import MongoService
-from src.language.LocalesService import get_text
-from src.keyboards.ProfileKeyboard import profile_keyboard
+from src.core.database.MongoService import MongoService
+from src.core.locale.LocalesService import get_text
+from src.feature.keyboards.ProfileKeyboard import profile_keyboard
 
 """
 @author Nik/diplexion

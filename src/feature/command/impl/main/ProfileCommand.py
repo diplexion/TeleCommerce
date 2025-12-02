@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.filters.command import Command
 from aiogram.types import Message
 
-from src.profile.ProfileService import profile
+from src.core.profile.ProfileService import profile
 
 """
 @author Nik/diplexion

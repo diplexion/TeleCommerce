@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.filters.command import Command
 from aiogram.types import Message
 
-from src.store.StoreService import store
+from src.core.store.StoreService import store
 
 """
 @author Nik/diplexion

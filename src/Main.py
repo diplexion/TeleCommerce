@@ -2,10 +2,10 @@ import logging
 
 from aiogram import Router
 
-from src.command.CommandUtility import router as CommandUtility
-from src.database.MongoService import MongoService
-from src.profile.ProfileService import router as ProfileService
-from src.payments.PaymentService import router as PaymentService
+from src.feature.command.CommandUtility import router as CommandUtility
+from src.core.database.MongoService import MongoService
+from src.core.profile.ProfileService import router as ProfileService
+from src.core.payments.PaymentService import router as PaymentService
 
 """
 @author Nik/diplexion

@@ -14,8 +14,8 @@ from pymongo.errors import ConnectionFailure
 
 from config import Config
 from src.Main import router as main_router
-from src.database.MongoService import MongoService
-from src.middlewares.LanguageMiddleware import LanguageMiddleware
+from src.core.database.MongoService import MongoService
+from src.core.middlewares import LanguageMiddleware
 
 """
 @author Nik/diplexion

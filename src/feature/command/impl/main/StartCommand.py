@@ -7,8 +7,8 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from src.database.MongoService import MongoService
-from src.language.LocalesService import get_text
+from src.core.database.MongoService import MongoService
+from src.core.locale.LocalesService import get_text
 
 """
 @author Nik/diplexion

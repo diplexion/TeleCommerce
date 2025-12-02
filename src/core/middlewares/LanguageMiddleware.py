@@ -2,7 +2,7 @@ from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import Update
 
-from src.database.MongoService import MongoService
+from src.core.database.MongoService import MongoService
 
 """
 @author Nik/diplexion

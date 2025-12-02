@@ -2,7 +2,7 @@ import logging
 
 from aiogram import Router
 
-from src.database.MongoService import MongoService
+from src.core.database.MongoService import MongoService
 
 """
 @author Nik/diplexion

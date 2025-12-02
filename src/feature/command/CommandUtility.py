@@ -2,12 +2,12 @@ import logging
 
 from aiogram import Router
 
-from src.command.impl.main.ProfileCommand import router as ProfileCommandRouter
-from src.command.impl.main.StartCommand import router as StartCommandRouter
-from src.command.impl.main.InfoCommand import router as InfoCommandRouter
-from src.command.impl.main.StoreCommand import router as StoreCommandRouter
+from src.feature.command.impl.main.ProfileCommand import router as ProfileCommandRouter
+from src.feature.command.impl.main.StartCommand import router as StartCommandRouter
+from src.feature.command.impl.main.InfoCommand import router as InfoCommandRouter
+from src.feature.command.impl.main.StoreCommand import router as StoreCommandRouter
 
-from src.command.impl.staff.StaffCommand import router as StaffCommandRouter
+from src.feature.command.impl.staff.StaffCommand import router as StaffCommandRouter
 
 """
 @author Nik/diplexion

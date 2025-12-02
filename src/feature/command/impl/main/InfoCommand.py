@@ -2,8 +2,8 @@ from aiogram import Router
 from aiogram.filters.command import Command
 from aiogram.types import Message
 
-from src.language.LocalesService import get_text
-from src.database.MongoService import MongoService
+from src.core.locale.LocalesService import get_text
+from src.core.database.MongoService import MongoService
 
 """
 @author Nik/diplexion

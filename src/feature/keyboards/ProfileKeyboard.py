@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from src.language.LocalesService import get_text
+from src.core.locale.LocalesService import get_text
 
 """
 @author Nik/diplexion
