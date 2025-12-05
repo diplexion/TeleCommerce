@@ -30,3 +30,5 @@ class Config:
 
         # "users" by default
         USER_COLLECTION_NAME = getenv("USER_COLLECTION_NAME")
+        # "categories" by default
+        CATEGORY_COLLECTION_NAME = getenv("CATEGORY_COLLECTION_NAME")

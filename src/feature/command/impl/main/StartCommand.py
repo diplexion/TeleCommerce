@@ -6,6 +6,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.enums import ParseMode
 
 from src.core.database.MongoService import MongoService
 from src.core.locale.LocalesService import get_text
@@ -48,7 +49,7 @@ async def start_cmd(message: Message, state: FSMContext, locale: str) -> None:
         language = profile.get('language', 'ru-RU')
 
         welcome_text = get_text("welcome", language, name=message.from_user.first_name)
-        await message.answer(welcome_text)
+        await message.answer(welcome_text, parse_mode=ParseMode.MARKDOWN)
 
     except Exception as e:
         logger.error(f"Ошибка в функции start для пользователя {message.from_user.id}: {e}")
@@ -65,7 +66,8 @@ async def show_language_selection(message: Message, state: FSMContext) -> None:
     await message.answer(
         "🌐 Пожалуйста, выберите язык интерфейса:\n\n"
         "Please select your interface language:",
-        reply_markup=keyboard
+        reply_markup=keyboard,
+        parse_mode=ParseMode.MARKDOWN
     )
     await state.set_state(StartStates.choose_language)
 

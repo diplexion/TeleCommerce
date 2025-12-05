@@ -98,3 +98,10 @@ If you have any questions, contact support: {support_contact}
 Select a product category:    
         """
 
+    class Staff:
+        STAFF_MENU = """
+🛠 *Staff Menu*
+
+Welcome to the staff menu. Here you can manage various aspects of the bot and serve users.
+        """
+

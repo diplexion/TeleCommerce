@@ -13,7 +13,7 @@ from config import Config
 @date 01/12/2025
 """
 
-#TODO Recode MongoService cuz it poor now
+#TODO Recode MongoService cuz it poor now (make more localized error handling)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,12 +34,14 @@ class MongoService:
         self,
         uri: str = Config.Database.MONGO_URI,
         db_name: str = Config.Database.DB_NAME,
-        users_collection: str = Config.Database.USER_COLLECTION_NAME
+        users_collection: str = Config.Database.USER_COLLECTION_NAME,
+        category_collection: str = Config.Database.CATEGORY_COLLECTION_NAME
     ):
         self.cache = {}
         self.uri = uri or "mongodb://localhost:27017"
         self.db_name = db_name or "TeleCommerce"
         self.users_collection_name = users_collection or "users"
+        self.create_category_collection = category_collection or "categories"
 
         self.client = motor.motor_asyncio.AsyncIOMotorClient(
             self.uri,
@@ -99,6 +101,10 @@ class MongoService:
     @property
     def users_collection(self):
         return self.db[self.users_collection_name]
+
+    @property
+    def category_collection(self):
+        return self.db[self.create_category_collection]
 
     # ------------------- USERS ------------------- #
     @async_log_execution_time
@@ -293,3 +299,53 @@ class MongoService:
         else:
             logger.warning(f"Неизвестный запрос: {request}")
             return "Failed! Incorrect request!"
+
+    # --------------- CATEGORY --------------- #
+
+    @async_log_execution_time
+    async def create_category(self, name: str, description: str):
+        try:
+            existing_category = await self.category_collection.find_one({"name": name})
+            if existing_category:
+                logger.info(f"Категория с именем {name} уже существует")
+                return True
+            category_data = {
+                "NAME": name,
+                "DESCRIPTION": description,
+                "CREATED_AT": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            result = await self.category_collection.insert_one(category_data)
+            logger.info(f"Категория с именем {name} успешно создана")
+            return bool(result.inserted_id)
+        except Exception as e:
+            logger.error(f"Ошибка при создании категории: {e}")
+            return False
+
+    @async_log_execution_time
+    async def delete_category(self, name: str):
+        try:
+            result = await self.category_collection.delete_one({"NAME": name})
+            success = result.deleted_count > 0
+            if success:
+                logger.info(f"Категория с именем {name} успешно удалена")
+            else:
+                logger.warning(f"Категория с именем {name} не найдена")
+            return success
+        except Exception as e:
+            logger.error(f"Ошибка при удалении категории: {e}")
+            return False
+
+    @async_log_execution_time
+    async def get_all_categories(self):
+        try:
+            categories = []
+            async for category in self.category_collection.find({}):
+                categories.append(category)
+            if not categories:
+                logger.warning("Категории не найдены")
+                return []
+            logger.info(f"Получено {len(categories)} категорий")
+            return categories
+        except Exception as e:
+            logger.error(f"Ошибка при получении категорий: {e}")
+            return []

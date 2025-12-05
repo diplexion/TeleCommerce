@@ -32,6 +32,7 @@ LOCALES = {
                 "title_stars_payment": RuMessages.Profile.Stars.TITLE_STARS_PAYMENT,
                 "description_stars_payment": RuMessages.Profile.Stars.DESCRIPTION_STARS_PAYMENT,
                 "successful_stars_payment": RuMessages.Profile.Stars.SUCCESSFUL_PAYMENT,
+            },
             #TODO Add crypto payment option later
             #"crypto": {
                 #"input_amount": RuMessages.Profile.Crypto.INPUT_AMOUNT,
@@ -41,7 +42,9 @@ LOCALES = {
                 #"description_crypto_payment": RuMessages.Profile.Crypto.DESCRIPTION_CRYPTO_PAYMENT,
                 #"successful_crypto_payment": RuMessages.Profile.Crypto.SUCCESSFUL_PAYMENT,
             #}
-            },
+        },
+        "staff": {
+            "staff_menu": RuMessages.Staff.STAFF_MENU,
         },
         "store": {
             "store_main": RuMessages.Store.STORE_MAIN,
@@ -77,6 +80,9 @@ LOCALES = {
         },
         "store": {
             "store_main": EnglishMessages.Store.STORE_MAIN,
+        },
+        "staff": {
+            "staff_menu": EnglishMessages.Staff.STAFF_MENU,
         },
         "error": EnglishMessages.ERROR,
         "profile_created": EnglishMessages.PROFILE_CREATED,

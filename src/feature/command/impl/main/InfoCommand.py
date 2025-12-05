@@ -21,4 +21,8 @@ async def info_cmd(message: Message) -> None:
     profile = user.get('PROFILE', {})
     language = profile.get('language', 'ru-RU')
 
-    await message.answer(text=get_text("info", language), disable_web_page_preview=True)
+    await message.answer(
+        text=get_text("info", language),
+        disable_web_page_preview=True,
+        parse_mode="Markdown"
+    )
